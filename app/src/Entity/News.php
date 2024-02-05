@@ -26,6 +26,9 @@ class News
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $publishDate = null;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,5 +80,15 @@ class News
         $this->publishDate = $publishDate;
 
         return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): void
+    {
+        $this->image = $image;
     }
 }

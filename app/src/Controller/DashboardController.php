@@ -2,17 +2,21 @@
 
 namespace App\Controller;
 
+use App\Repository\NewsRepository;
+use App\Service\DashboardService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 class DashboardController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function index(): Response
+    public function index(Environment $twig, DashboardService $dashboardService): Response
     {
-        return $this->render('dashboard/index.html.twig', [
-            'controller_name' => 'DashboardController',
-        ]);
+         return new Response($twig->render('dashboard/index.html.twig', [
+             'items' => $dashboardService->collectAllNews(),
+             'controller_name' => 'DashboardController',
+         ]));
     }
 }
