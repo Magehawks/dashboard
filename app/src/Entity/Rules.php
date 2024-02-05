@@ -15,10 +15,10 @@ class Rules
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $Description = null;
+    private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $Bosses = null;
+    private ?string $bosses = null;
 
     public function getId(): ?int
     {
@@ -27,23 +27,23 @@ class Rules
 
     public function getBosses(): ?string
     {
-        return $this->Bosses;
+        return $this->bosses;
     }
 
-    public function setBosses(?string $Bosses): static
+    public function setBosses(?string $bosses): static
     {
-        $this->Bosses = $Bosses;
+        $this->bosses = $bosses;
 
         return $this;
     }
 
     public function getDescription(): ?string
     {
-        return $this->Description;
+        return $this->description;
     }
 
-    public function setDescription(?string $Description): void
+    public function setDescription(?string $description): void
     {
-        $this->Description = $Description;
+        $this->description = $description;
     }
 }

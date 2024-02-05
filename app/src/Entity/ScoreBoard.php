@@ -15,19 +15,19 @@ class ScoreBoard
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Player = null;
+    private ?string $player = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Points = null;
+    private ?string $points = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $Time = null;
+    private ?\DateTimeInterface $time = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $EventName = null;
+    private ?string $eventName = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $Link = null;
+    private ?string $link = null;
 
     public function getId(): ?int
     {
@@ -36,36 +36,36 @@ class ScoreBoard
 
     public function getPlayer(): ?string
     {
-        return $this->Player;
+        return $this->player;
     }
 
-    public function setPlayer(string $Player): static
+    public function setPlayer(string $player): static
     {
-        $this->Player = $Player;
+        $this->player = $player;
 
         return $this;
     }
 
     public function getPoints(): ?string
     {
-        return $this->Points;
+        return $this->points;
     }
 
-    public function setPoints(?string $Points): static
+    public function setPoints(?string $points): static
     {
-        $this->Points = $Points;
+        $this->points = $points;
 
         return $this;
     }
 
     public function getTime(): ?\DateTimeInterface
     {
-        return $this->Time;
+        return $this->time;
     }
 
-    public function setTime(?\DateTimeInterface $Time): static
+    public function setTime(?\DateTimeInterface $time): static
     {
-        $this->Time = $Time;
+        $this->Time = $time;
 
         return $this;
     }

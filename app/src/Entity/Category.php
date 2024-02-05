@@ -15,13 +15,13 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Name = null;
+    private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?object $Rules = null;
+    private ?object $rules = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?object $Description = null;
+    private ?object $description = null;
 
     public function getId(): ?int
     {
@@ -30,36 +30,36 @@ class Category
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): static
+    public function setName(string $name): static
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
 
     public function getRules(): ?object
     {
-        return $this->Rules;
+        return $this->rules;
     }
 
-    public function setRules(object $Rules): static
+    public function setRules(object $rules): static
     {
-        $this->Rules = $Rules;
+        $this->rules = $rules;
 
         return $this;
     }
 
     public function getDescription(): ?object
     {
-        return $this->Description;
+        return $this->description;
     }
 
-    public function setDescription(object $Description): static
+    public function setDescription(object $description): static
     {
-        $this->Description = $Description;
+        $this->description = $description;
 
         return $this;
     }
