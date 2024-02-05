@@ -20,6 +20,9 @@ class Game
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $Image = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $Description = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -47,5 +50,15 @@ class Game
         $this->Image = $Image;
 
         return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->Description;
+    }
+
+    public function setDescription(?string $Description): void
+    {
+        $this->Description = $Description;
     }
 }

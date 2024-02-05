@@ -31,10 +31,9 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
-        yield MenuItem::linkToCrud('Games', 'fas fa-map-marker-alt', Game::Class);
-        yield MenuItem::linkToCrud('Categorys', 'fas fa-comments', Category::class);
-        yield MenuItem::linkToCrud('Rules', 'fas fa-comments', Rules::class);
+        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
+        yield MenuItem::linkToCrud('Games', 'fas fa-list', Game::Class);
+        yield MenuItem::linkToCrud('Categorys', 'fas fa-list', Category::class);
+        yield MenuItem::linkToCrud('Rules', 'fas fa-list', Rules::class);
     }
 }

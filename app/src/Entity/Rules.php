@@ -15,7 +15,7 @@ class Rules
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $DescripÃtion = null;
+    private ?string $Description = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $Bosses = null;
@@ -23,18 +23,6 @@ class Rules
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getDescripÃtion(): ?string
-    {
-        return $this->DescripÃtion;
-    }
-
-    public function setDescripÃtion(string $DescripÃtion): static
-    {
-        $this->DescripÃtion = $DescripÃtion;
-
-        return $this;
     }
 
     public function getBosses(): ?string
@@ -47,5 +35,15 @@ class Rules
         $this->Bosses = $Bosses;
 
         return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->Description;
+    }
+
+    public function setDescription(?string $Description): void
+    {
+        $this->Description = $Description;
     }
 }
