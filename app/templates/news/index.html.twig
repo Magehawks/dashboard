@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>News From the Blues</h2>
+    {% for item in items %}
+        <h4>{{ item.title }}</h4>
+    {% endfor %}
+{% endblock %}
+
