@@ -1,6 +1,21 @@
-
-{% block title %}Hello DashboardController!{% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %}Startseite - CouchRunGaming{% endblock %}
 
 {% block body %}
-    {% include 'news/index.html.twig' %}
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Player Records</h3>
+            <div class="record">
+                <h3>Player Name</h3>
+                <p>Game: Game Name</p>
+                <p>Category: Category Name</p>
+            </div>
+            <!-- More player records can be added here -->
+        </aside>
+        <main class="main-content">
+            {% include 'news/index.html.twig' %}
+            <!-- More news items can be added here -->
+        </main>
+    </div>
+
 {% endblock %}

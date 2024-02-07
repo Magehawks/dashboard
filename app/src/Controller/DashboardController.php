@@ -11,7 +11,7 @@ use Twig\Environment;
 
 class DashboardController extends AbstractController
 {
-    #[Route('/', name: 'homepage')]
+    #[Route('/', name: 'startpage')]
     public function index(Environment $twig, DashboardService $dashboardService): Response
     {
          return new Response($twig->render('dashboard/index.html.twig', [

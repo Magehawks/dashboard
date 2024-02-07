@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\AdminRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: AdminRepository::class)]
-#[ORM\Table(name: '`admin`')]
-class Admin implements UserInterface, PasswordAuthenticatedUserInterface
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,14 +18,23 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $username = null;
 
+    #[ORM\Column(length: 180, unique: true, nullable: true)]
+    private ?string $email = null;
+
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(length: 180, unique: true, nullable: true)]
+    private $steamUsername = null;
+
+    #[ORM\Column(length: 180, nullable: true)]
+    private $livingCity = null;
+
+    #[ORM\Column(length: 180, nullable: true)]
+    private $livingCountry = null;
 
     public function getId(): ?int
     {
@@ -87,6 +95,64 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSteamUsername()
+    {
+        return $this->steamUsername;
+    }
+
+    /**
+     * @param mixed $steamUsername
+     */
+    public function setSteamUsername($steamUsername): void
+    {
+        $this->steamUsername = $steamUsername;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLivingCity()
+    {
+        return $this->livingCity;
+    }
+
+    /**
+     * @param mixed $livingCity
+     */
+    public function setLivingCity($livingCity): void
+    {
+        $this->livingCity = $livingCity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLivingCountry()
+    {
+        return $this->livingCountry;
+    }
+
+    /**
+     * @param mixed $livingCountry
+     */
+    public function setLivingCountry($livingCountry): void
+    {
+        $this->livingCountry = $livingCountry;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): void
+    {
+        $this->email = $email;
     }
 
     /**

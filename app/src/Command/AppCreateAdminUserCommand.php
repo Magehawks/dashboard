@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Entity\Admin;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -41,7 +41,7 @@ class AppCreateAdminUserCommand extends Command
         $username = $input->getArgument('username');
         $password = $input->getArgument('password');
 
-        $user = new Admin();
+        $user = new User();
         $user->setUsername($username);
         // Update this line to use the password hasher instead
         $user->setPassword($this->passwordHasher->hashPassword($user, $password));

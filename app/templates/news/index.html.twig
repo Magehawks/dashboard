@@ -1,9 +1,16 @@
-{% extends 'base.html.twig' %}
-
 {% block body %}
-    <h2>News From the Blues</h2>
-    {% for item in items %}
-        <h4>{{ item.title }}</h4>
-    {% endfor %}
+    <section id="news-section">
+        <h3>News From the Blues</h3>
+        {% for article in items %}
+            <article class="news-item">
+                <img src="{{ asset(article.image) }}" alt="{{ article.title }}">
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.description }}</p>
+                <a href="{{ article.link }}">Read More</a>
+            </article>
+        {% else %}
+            <p>No articles found.</p>
+        {% endfor %}
+    </section>
 {% endblock %}
 
