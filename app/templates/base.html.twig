@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" type="image/jpg" href="{{ asset('images/favicon.ico') }}" />
+        <link rel="icon" type="image/jpg" href="{{ asset('images/crg_favicon.ico') }}" />
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -20,14 +20,13 @@
     <nav class="main-navigation">
         <div class="nav-logo">
             <a href="{{ path('startpage') }}">
-                <img src="{{ asset('images/website.png') }}" alt="Website Logo">
+                <img src="{{ asset('images/crg_logo.png') }}" alt="Website Logo"> Couch Run Gaming
             </a>
         </div>
         <ul class="nav-links">
-            <li><a href="{{ path('app_game') }}">Games</a></li>
-            <li><a href="{{ path('app_game') }}">Help</a></li>
-            <li><a href="{{ path('app_game') }}">Impress</a></li>
-            <li><a href="{{ path('app_game') }}">Data Privacy</a></li>
+            <li><a href="{{ path('game_list') }}">Games</a></li>
+            <li><a href="{{ path('app_impress_index') }}">Impress</a></li>
+            <li><a href="{{ path('app_data_privacy_index') }}">Data Privacy</a></li>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <li><a href="{{ path('app_profile') }}">Profile</a></li>
                 <li><a href="{{ path('app_logout') }}">Logout</a></li>

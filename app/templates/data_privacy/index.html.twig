@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DataPrivacy index{% endblock %}
+
+{% block body %}
+    <h1>DataPrivacy index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Content</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for data_privacy in data_privacies %}
+            <tr>
+                <td>{{ data_privacy.id }}</td>
+                <td>{{ data_privacy.content }}</td>
+                <td>
+                    <a href="{{ path('app_data_privacy_show', {'id': data_privacy.id}) }}">show</a>
+                    <a href="{{ path('app_data_privacy_edit', {'id': data_privacy.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_data_privacy_new') }}">Create new</a>
+{% endblock %}

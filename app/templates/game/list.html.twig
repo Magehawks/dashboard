@@ -1,0 +1,24 @@
+{# templates/game/list.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Games List</h1>
+        <div class="games-list">
+            {% for game in games %}
+                <div class="game-item">
+                    <a href="{{ path('game_records', {'id': game.id}) }}">
+                        <img src="{{ game.image }}" alt="{{ game.name }}" class="game-image">
+                        <div class="game-info">
+                            <h2>{{ game.name }}</h2>
+                            <p>Release Year: {{ game.releaseYear }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% else %}
+                <p>No games found.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

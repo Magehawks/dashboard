@@ -17,6 +17,12 @@ class Game
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $releaseYear = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $plattforms = null;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $image = null;
 
@@ -60,5 +66,25 @@ class Game
     public function setDescription(?string $description): void
     {
         $this->description = $description;
+    }
+
+    public function getReleaseYear(): ?string
+    {
+        return $this->releaseYear;
+    }
+
+    public function setReleaseYear(?string $releaseYear): void
+    {
+        $this->releaseYear = $releaseYear;
+    }
+
+    public function getPlattforms(): ?string
+    {
+        return $this->plattforms;
+    }
+
+    public function setPlattforms(?string $plattforms): void
+    {
+        $this->plattforms = $plattforms;
     }
 }

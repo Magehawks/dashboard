@@ -21,28 +21,23 @@ class ScoreBoardRepository extends ServiceEntityRepository
         parent::__construct($registry, ScoreBoard::class);
     }
 
-//    /**
-//     * @return ScoreBoard[] Returns an array of ScoreBoard objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?ScoreBoard
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findByGameOrdered($gameId = null, $category = null)
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->orderBy('s.points', 'DESC')
+            ->addOrderBy('s.time', 'ASC');
+
+        if ($gameId !== null) {
+            $qb->andWhere('s.game = :gameId')
+                ->setParameter('gameId', $gameId);
+        }
+
+        if ($category !== null) {
+            $qb->andWhere('s.category = :category')
+                ->setParameter('category', $category);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }

@@ -6,9 +6,18 @@
         <aside class="sidebar">
             <h3>Player Records</h3>
             <div class="record">
-                <h3>Player Name</h3>
-                <p>Game: Game Name</p>
-                <p>Category: Category Name</p>
+                <tbody>
+                {% for record in records %}
+                    <tr>
+                        <td>
+                            <a href="#">
+                                {{ record.player }}{{ record.points }}{{ record.category.name }}{{ record.time ? record.time|date('Y-m-d H:i') : '' }}</a><br></td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">No records found.</td>
+                    </tr>
+                {% endfor %}
             </div>
             <!-- More player records can be added here -->
         </aside>

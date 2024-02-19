@@ -18,10 +18,10 @@ class Category
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?object $rules = null;
+    private ?string $rules = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?object $description = null;
+    private ?string $description = null;
 
     public function getId(): ?int
     {
@@ -40,27 +40,23 @@ class Category
         return $this;
     }
 
-    public function getRules(): ?object
+    public function getRules(): ?string
     {
         return $this->rules;
     }
 
-    public function setRules(object $rules): static
+    public function setRules(?string $rules): void
     {
         $this->rules = $rules;
-
-        return $this;
     }
 
-    public function getDescription(): ?object
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(object $description): static
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 }

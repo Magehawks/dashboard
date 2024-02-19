@@ -1,0 +1,16 @@
+{# templates/score_board/new.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New ScoreBoard{% endblock %}
+
+{% block body %}
+    <h1>Create New ScoreBoard</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">Create</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('game_records', {'id': gameId}) }}">Back to list</a>
+{% endblock %}

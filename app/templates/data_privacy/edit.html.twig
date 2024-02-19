@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit DataPrivacy{% endblock %}
+
+{% block body %}
+    <h1>Edit DataPrivacy</h1>
+
+    {{ include('data_privacy/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_data_privacy_index') }}">back to list</a>
+
+    {{ include('data_privacy/_delete_form.html.twig') }}
+{% endblock %}

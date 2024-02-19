@@ -16,6 +16,7 @@ class DashboardController extends AbstractController
     {
          return new Response($twig->render('dashboard/index.html.twig', [
              'items' => $dashboardService->collectAllNews(),
+             'records' => $dashboardService->collectAllRecords(),
              'controller_name' => 'DashboardController',
          ]));
     }

@@ -228,3 +228,26 @@ body, html {
     }
 }
 
+/* Add this in your public/css/style.css or directly in the Twig template within a <style> block */
+.games-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.game-item {
+    width: calc(33.333% - 20px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.game-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.game-info {
+    padding: 10px;
+}
+
+
