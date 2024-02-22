@@ -3,15 +3,17 @@
 
 {% block body %}
     <div class="container">
-        <aside class="sidebar">
+        <main class="sidebar">
             <h3>Player Records</h3>
             <div class="record">
                 <tbody>
                 {% for record in records %}
                     <tr>
                         <td>
-                            <a href="#">
-                                {{ record.player }}{{ record.points }}{{ record.category.name }}{{ record.time ? record.time|date('Y-m-d H:i') : '' }}</a><br></td>
+                            <a href="/scoreboard/game/{{ record.game.id }}/records">
+                                {% if record.player.isRegistered %}
+                                    <span class="badge">Crew Member</span>
+                                {% endif %}  <img style="width: 50px" src="/images/{{ record.game.image }}" alt="{{ record.game.name }}" class="game-image"> {{ record.player.username }}{{ record.points }}{{ record.category.name }}{{ record.time ? record.time|date('H:i:s') : '' }}</a><br></td>
                     </tr>
                 {% else %}
                     <tr>
@@ -20,11 +22,11 @@
                 {% endfor %}
             </div>
             <!-- More player records can be added here -->
-        </aside>
-        <main class="main-content">
+        </main>
+        <aside class="main-content">
             {% include 'news/index.html.twig' %}
             <!-- More news items can be added here -->
-        </main>
+        </aside>
     </div>
 
 {% endblock %}

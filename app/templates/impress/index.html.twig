@@ -3,33 +3,16 @@
 {% block title %}Impress index{% endblock %}
 
 {% block body %}
-    <h1>Impress index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<div class="container">
+    <h1>Impress</h1>
         {% for impress in impresses %}
-            <tr>
-                <td>{{ impress.id }}</td>
-                <td>{{ impress.content }}</td>
-                <td>
-                    <a href="{{ path('app_impress_show', {'id': impress.id}) }}">show</a>
-                    <a href="{{ path('app_impress_edit', {'id': impress.id}) }}">edit</a>
-                </td>
-            </tr>
+            <p>
+                {{ impress.content|raw }}
+            </p>
         {% else %}
             <tr>
                 <td colspan="3">no records found</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_impress_new') }}">Create new</a>
+</div>
 {% endblock %}

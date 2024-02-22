@@ -46,14 +46,14 @@ main {
 }
 
 aside h2, section h2 {
-    color: #333;
+    color: #051C00;
 }
 
 .main-navigation ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    background-color: #333;
+    background-color: #051C00;
     overflow: hidden;
 }
 
@@ -70,8 +70,11 @@ aside h2, section h2 {
 }
 
 .main-navigation li a:hover {
-    background-color: #ddd;
-    color: black;
+    background-color: #0A3C02; /* Darker shade for hover background */
+    color: #CCD5AE; /* Lighter shade for hover font color */
+    transform: translateY(-5px); /* Lifts the link for a 3D effect */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Enhanced shadow to accentuate the 3D effect */
+
 }
 
 /* Update to your existing style.css */
@@ -104,11 +107,11 @@ aside h2, section h2 {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #333;
+    background-color: #051C00;
 }
 
 .nav-logo img {
-    height: 50px; /* Adjust based on your logo's size */
+    height: 100px; /* Adjust based on your logo's size */
 }
 
 .nav-links {
@@ -200,7 +203,6 @@ body, html {
 }
 
 .sidebar {
-    flex: 1; /* Adjust the flex property to control the width */
     margin-right: 20px; /* Spacing between the columns */
 }
 
@@ -245,9 +247,65 @@ body, html {
     height: auto;
     display: block;
 }
+/* Add to your stylesheet */
+.games-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the space between items */
+}
+
+/* Base styling for game items */
+.game-item {
+    position: relative;
+    width: 150px; /* Set a default width */
+    height: 250px; /* Set a default height */
+    overflow: hidden;
+    border-radius: 8px; /* Optional: rounds the corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    margin-bottom: 20px; /* Space below each item */
+}
+
+/* Hover effect */
+.game-item:hover {
+    transform: translateY(-10px); /* Moves the item up */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow for a lifted effect */
+}
+
+.game-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the item area */
+}
 
 .game-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Black background with some transparency */
+    color: white; /* White text color */
     padding: 10px;
+}
+
+.game-info h2 {
+    font-size: 1.25rem;
+    margin: 0 0 5px 0;
+    font-weight: bold; /* Makes the game name bold */
+}
+
+.game-info p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.badge {
+    background-color: #007bff; /* Example badge color */
+    color: white;
+    padding: 2px 8px;
+    border-radius: 15px;
+    font-size: 0.75em;
+    margin-left: 10px;
 }
 
 

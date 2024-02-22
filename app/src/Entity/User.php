@@ -36,6 +36,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, nullable: true)]
     private $livingCountry = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $verificationToken;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isRegistered = false;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -153,6 +165,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(?string $email): void
     {
         $this->email = $email;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): void
+    {
+        $this->isVerified = $isVerified;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVerificationToken()
+    {
+        return $this->verificationToken;
+    }
+
+    /**
+     * @param mixed $verificationToken
+     */
+    public function setVerificationToken($verificationToken): void
+    {
+        $this->verificationToken = $verificationToken;
+    }
+
+    public function isRegistered(): bool
+    {
+        return $this->isRegistered;
+    }
+
+    public function setIsRegistered(bool $isRegistered): void
+    {
+        $this->isRegistered = $isRegistered;
     }
 
     /**

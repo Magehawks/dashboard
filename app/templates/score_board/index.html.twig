@@ -3,9 +3,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="container">
     <h1>Game Records</h1>
     {# Add this at the top or bottom of templates/score_board/game_records.html.twig #}
-
     <a href="{{ path('score_board_new', {'gameId': gameId}) }}" class="btn btn-primary">Create Record</a>
     <table>
         <thead>
@@ -19,10 +19,13 @@
         <tbody>
         {% for record in records %}
             <tr>
-                <td>{{ record.player }}</td>
+                {% if record.player.isRegistered %}
+                    <span class="badge">Crew Member</span>
+                {% endif %}
+                <td>{{ record.player.username}}</td>
                 <td>{{ record.points }}</td>
                 <td>{{ record.category.name }}</td>
-                <td>{{ record.time ? record.time|date('Y-m-d H:i') : '' }}</td>
+                <td>{{ record.time ? record.time|date('H:i:s') : '' }}</td>
             </tr>
         {% else %}
             <tr>
@@ -31,4 +34,5 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 {% endblock %}

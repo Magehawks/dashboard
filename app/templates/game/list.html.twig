@@ -4,15 +4,14 @@
 
 {% block body %}
     <div class="container">
-        <h1>Games List</h1>
         <div class="games-list">
             {% for game in games %}
                 <div class="game-item">
-                    <a href="{{ path('game_records', {'id': game.id}) }}">
-                        <img src="{{ game.image }}" alt="{{ game.name }}" class="game-image">
+                    <a href="{{ path('game_records', {'gameId': game.id}) }}">
+                        <img src="/images/{{ game.image }}" alt="{{ game.name }}" class="game-image">
                         <div class="game-info">
-                            <h2>{{ game.name }}</h2>
-                            <p>Release Year: {{ game.releaseYear }}</p>
+                            <p>{{ game.name }}</p>
+                            <p>{{ game.releaseYear }}</p>
                         </div>
                     </a>
                 </div>

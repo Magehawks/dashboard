@@ -2,6 +2,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="container">
     <h1>Profile</h1>
     <div>User Info:</div>
     <ul>
@@ -15,10 +16,14 @@
         <h3>{{ game }}</h3>
         <ul>
             {% for record in records %}
-                <li>{{ record.details }}</li> <!-- Adjust based on your record structure -->
+                <li> <a href="/scoreboard/game/{{ record.game.id }}/records">
+                        {% if record.player.isRegistered %}
+                            <span class="badge">Crew Member</span>
+                        {% endif %} {{ record.player.username }}{{ record.points }}{{ record.category.name }}{{ record.time ? record.time|date('H:i:s') : '' }}</a><br></li> <!-- Adjust based on your record structure -->
             {% endfor %}
         </ul>
     {% else %}
         <p>No records found.</p>
     {% endfor %}
+</div>
 {% endblock %}

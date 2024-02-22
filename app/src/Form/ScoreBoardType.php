@@ -16,7 +16,6 @@ class ScoreBoardType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('player')
             ->add('points')
             ->add('time', TimeType::class, [
                 'input'  => 'datetime',
@@ -28,10 +27,6 @@ class ScoreBoardType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'name',
             ])
-            ->add('game', EntityType::class, [
-                'class' => Game::class,
-                'choice_label' => 'id',
-            ]);
         ;
     }
 

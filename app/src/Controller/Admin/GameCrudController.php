@@ -26,9 +26,8 @@ class GameCrudController extends AbstractCrudController
         $descriptionField = TextareaField::new('description');
 
         $imageField = ImageField::new('image')
-            ->setBasePath('/public/images/') // Adjust accordingly
-            ->setUploadDir('/public/images/') // Adjust accordingly
-            ->setUploadedFileNamePattern('[randomhash].[extension]');
+            ->setBasePath('/images/') // Adjust accordingly
+            ->setUploadDir('public/images/'); // Adjust accordingly
         return [
             $nameField,
             $imageField,

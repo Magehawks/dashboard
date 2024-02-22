@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\DataPrivacy;
 use App\Entity\Game;
+use App\Entity\Impress;
 use App\Entity\Rules;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -35,5 +37,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Games', 'fas fa-list', Game::Class);
         yield MenuItem::linkToCrud('Categorys', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Rules', 'fas fa-list', Rules::class);
+        yield MenuItem::linkToCrud('Impress', 'fas fa-list', Impress::class);
+        yield MenuItem::linkToCrud('Data Privacy', 'fas fa-list', DataPrivacy::class);
     }
 }

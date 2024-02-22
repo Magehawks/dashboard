@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\GameRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 class Game
@@ -86,5 +89,28 @@ class Game
     public function setPlattforms(?string $plattforms): void
     {
         $this->plattforms = $plattforms;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function upload()
+    {
+        if ($this->image instanceof UploadedFile) {
+            $filesystem = new Filesystem();
+            $targetDirectory = __DIR__.'/../../public/images'; // Adjust the path as needed
+            $newFilename = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $this->name))).'.'.$this->image->guessExtension();
+
+            try {
+                // Move the file to the target directory with the new name
+                $this->image->move($targetDirectory, $newFilename);
+                // Update the image property to reflect the new filename
+                $this->image = $newFilename;
+            } catch (IOExceptionInterface $exception) {
+                // Handle errors, e.g., log them or throw an exception
+                echo "An error occurred while moving the file ".$exception->getPath();
+            }
+        }
     }
 }

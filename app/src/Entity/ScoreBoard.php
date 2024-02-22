@@ -13,9 +13,8 @@ class ScoreBoard
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $player = null;
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    private ?User $player = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $points = null;
@@ -31,6 +30,9 @@ class ScoreBoard
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $time = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $publishDate = null;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $link = null;
 
@@ -44,12 +46,12 @@ class ScoreBoard
         $this->id = $id;
     }
 
-    public function getPlayer(): ?string
+    public function getPlayer(): ?User
     {
         return $this->player;
     }
 
-    public function setPlayer(?string $player): void
+    public function setPlayer(?User $player): void
     {
         $this->player = $player;
     }
@@ -102,5 +104,15 @@ class ScoreBoard
     public function setLink(?string $link): void
     {
         $this->link = $link;
+    }
+
+    public function getPublishDate(): ?\DateTimeInterface
+    {
+        return $this->publishDate;
+    }
+
+    public function setPublishDate(?\DateTimeInterface $publishDate): void
+    {
+        $this->publishDate = $publishDate;
     }
 }
