@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,8 +17,9 @@ class RegistrationFormType extends AbstractType
             ->add('email')
             ->add('password')
             ->add('steamUsername')
-            ->add('livingCity')
-            ->add('livingCountry')
+            ->add('livingCountry', CountryType::class, [
+                'label' => 'Country',
+            ]);
         ;
     }
 

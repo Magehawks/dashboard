@@ -5,11 +5,12 @@
 {% block title %}Create New ScoreBoard{% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>Create New ScoreBoard</h1>
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <button class="btn">Create</button>
     {{ form_end(form) }}
-
+</div>
 {% endblock %}

@@ -6,6 +6,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" type="image/jpg" href="{{ asset('images/crg_favicon.ico') }}" />
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -20,7 +21,7 @@
     <nav class="main-navigation">
         <div class="nav-logo">
             <a href="{{ path('startpage') }}">
-                <img src="{{ asset('images/crg_logo.png') }}" alt="Website Logo">
+                <img src="{{ asset('images/couch_run_gaming-no-bg.png') }}" alt="Website Logo">
             </a>
         </div>
         <ul class="nav-links">
@@ -39,5 +40,12 @@
         {% block body %}{% endblock %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.querySelectorAll('.is-support').forEach(function(element) {
+            const username = element.getAttribute('data-username');
+            const spans = [...username].map((letter, index) => `<span class="animated-letter" style="animation-delay: ${index * 0.1}s;">${letter}</span>`).join('');
+            element.innerHTML = spans;
+        });
+    </script>
     </body>
 </html>

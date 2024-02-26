@@ -42,10 +42,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $verificationToken;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private $isRegistered = false;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isSupport = false;
 
 
     public function getId(): ?int
@@ -201,6 +202,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsRegistered(bool $isRegistered): void
     {
         $this->isRegistered = $isRegistered;
+    }
+
+    public function isSupport(): bool
+    {
+        return $this->isSupport;
+    }
+
+    public function setIsSupport(bool $isSupport): void
+    {
+        $this->isSupport = $isSupport;
     }
 
     /**

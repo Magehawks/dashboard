@@ -43,8 +43,41 @@ class ScoreBoardRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findRecordsByGameAndCategory($gameId = null, $category = null)
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->orderBy('s.points', 'DESC')
+            ->addOrderBy('s.time', 'ASC');
+
+        if ($gameId !== null) {
+            $qb->andWhere('s.game = :gameId')
+                ->setParameter('gameId', $gameId);
+        }
+
+        if ($category !== null) {
+            $qb->andWhere('s.category = :category')
+                ->setParameter('category', $category);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findRecordsByUser(User $user)
     {
         return $this->findBy(['player' => $user]);
+    }
+
+    public function findByGameAndCategory($gameId, $categoryId = null)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->where('r.game = :gameId')
+            ->setParameter('gameId', $gameId);
+
+        if ($categoryId) {
+            $qb->andWhere('r.category = :categoryId')
+                ->setParameter('categoryId', $categoryId);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }

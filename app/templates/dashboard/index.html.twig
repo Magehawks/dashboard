@@ -3,30 +3,61 @@
 
 {% block body %}
     <div class="container">
-        <main class="sidebar">
-            <h3>Player Records</h3>
-            <div class="record">
-                <tbody>
-                {% for record in records %}
-                    <tr>
-                        <td>
-                            <a href="/scoreboard/game/{{ record.game.id }}/records">
-                                {% if record.player.isRegistered %}
-                                    <span class="badge">Crew Member</span>
-                                {% endif %}  <img style="width: 50px" src="/images/{{ record.game.image }}" alt="{{ record.game.name }}" class="game-image"> {{ record.player.username }}{{ record.points }}{{ record.category.name }}{{ record.time ? record.time|date('H:i:s') : '' }}</a><br></td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="5">No records found.</td>
-                    </tr>
-                {% endfor %}
-            </div>
-            <!-- More player records can be added here -->
-        </main>
-        <aside class="main-content">
-            {% include 'news/index.html.twig' %}
-            <!-- More news items can be added here -->
-        </aside>
-    </div>
+        <div class="grid">
+            <section>
+                <hgroup>
+                    <h2>Welcome to Couch Run Gaming</h2>
+                </hgroup>
+                <h3>
+                    Your ultimate destination for speedrunning excellence.
+                </h3>
+                <p>
+                    Join our community to track, share, and break gaming records. Discover new challenges and compete with the best.
+                </p>
+                <div class="grid" style="grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                    <div class="sidebar">
+                        <h3>Newest Player Records</h3>
+                        <p>
+                            See who's topping the charts with the latest speedrunning and Runs feats across various games.
+                        </p>
+                        <div class="record">
 
+                            <tbody>
+                            {% for record in records %}
+                                <tr>
+                                    <td>
+                                        <a href="/scoreboard/game/{{ record.game.id }}/records" style="display: flex">
+
+                                            <img style="width: 70px; display: flex;" src="/images/{{ record.game.image }}" alt="{{ record.game.name }}" class="game-image">
+                                            <div style="padding: 10px;">
+                                                <div class="player-name">Player:
+                                                    {% if record.player.isRegistered %}
+                                                        <div class="badge"> <img src="/images/member-removebg.png" alt="badge" ></div>
+                                                    {% endif %}
+                                                    {% if record.player.isSupport %}
+                                                        <div class="is-support" data-username="{{ record.player.username | e('html_attr') }}"></div>
+                                                    {% else %}
+                                                        {{ record.player.username }}
+                                                    {% endif %}
+                                                </div><br>
+                                                Category: {{ record.category.name }}
+                                            </div>
+                                        </a><br></td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">No records found.</td>
+                                </tr>
+                            {% endfor %}
+                        </div>
+                        <!-- More player records can be added here -->
+                    </div>
+                    <div class="main-content">
+                        {% include 'news/index.html.twig' %}
+                        <!-- More news items can be added here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 {% endblock %}

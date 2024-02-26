@@ -4,35 +4,61 @@
 
 {% block body %}
     <div class="container">
-    <h1>Game Records</h1>
-    {# Add this at the top or bottom of templates/score_board/game_records.html.twig #}
-    <a href="{{ path('score_board_new', {'gameId': gameId}) }}" class="btn btn-primary">Create Record</a>
-    <table>
-        <thead>
-        <tr>
-            <th>Player</th>
-            <th>Points</th>
-            <th>Category</th>
-            <th>Time</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for record in records %}
+        <h1>Game Records</h1>
+        {# Add this at the top or bottom of templates/score_board/game_records.html.twig #}
+        <a href="{{ path('score_board_new', {'gameId': gameId}) }}" class="btn btn-primary">Create Record</a>
+        <table>
+            <thead>
             <tr>
-                {% if record.player.isRegistered %}
-                    <span class="badge">Crew Member</span>
-                {% endif %}
-                <td>{{ record.player.username}}</td>
-                <td>{{ record.points }}</td>
-                <td>{{ record.category.name }}</td>
-                <td>{{ record.time ? record.time|date('H:i:s') : '' }}</td>
+                <th>Place</th>
+                <th>Player</th>
+                <th>Nation</th>
+                <th>Points</th>
+                <th>Category</th>
+                <th>Time</th>
+                <th>Video Link</th>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">No records found.</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for record in records %}
+                <tr>
+                    <td>
+                        {# Medal Display #}
+                        {% if loop.index == 1 %}
+                            <img src="/images/medal_1.png" alt="Gold Medal" class="medal">
+                        {% elseif loop.index == 2 %}
+                            <img src="/images/medal_2.png" alt="Silver Medal" class="medal">
+                        {% elseif loop.index == 3 %}
+                            <img src="/images/medal_3.png" alt="Bronze Medal" class="medal">
+                        {% else %}
+                            <span class="medal-placeholder"></span> {# Placeholder for alignment #}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="player-name">
+                            {# Existing Player Display Logic #}
+                            {% if record.player.isRegistered %}
+                                <div class="badge"><img src="/images/member-removebg.png" alt="badge"></div>
+                            {% endif %}
+                            {% if record.player.isSupport %}
+                                <div class="is-support" data-username="{{ record.player.username | e('html_attr') }}"></div>
+                            {% else %}
+                                {{ record.player.username }}
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td><span class="fi fi-{{ record.player.livingCountry }}"></span></td>
+                    <td>{{ record.points }}</td>
+                    <td>{{ record.category.name }}</td>
+                    <td>{{ record.time ? record.time|date('H:i:s') : '' }}</td>
+                    <td>{{ record.link }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">No records found.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

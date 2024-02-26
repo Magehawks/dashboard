@@ -75,7 +75,7 @@ class ScoreBoardController extends AbstractController
     public function gameRecords(ScoreBoardRepository $repository, int $gameId): Response
     {
         // Fetch records for a specific game. This returns an empty array if no records are found.
-        $records = $repository->findBy(['game' => $gameId]);
+        $records = $repository->findByGameOrdered(['game' => $gameId]);
 
         // The check below is optional since findBy should already return an empty array if no results are found.
         // However, if you want to add additional logic based on the presence of records, you can do so.
