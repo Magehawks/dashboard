@@ -1,0 +1,25 @@
+{# templates/reset_password/reset.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset Your Password{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Reset Your Password</h1>
+        <p>Please enter your new password.</p>
+
+        {{ form_start(resetPasswordForm) }}
+        {{ form_row(resetPasswordForm.newPassword, {
+            label: 'New Password',
+            attr: {class: 'form-control'}
+        }) }}
+        {{ form_row(resetPasswordForm.plainPassword, {
+            label: 'Confirm Password',
+            attr: {class: 'form-control'}
+        }) }}
+
+        <button type="submit" class="btn btn-primary">Reset Password</button>
+        {{ form_end(resetPasswordForm) }}
+    </div>
+{% endblock %}

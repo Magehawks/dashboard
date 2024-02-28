@@ -4,10 +4,24 @@
 
 {% block body %}
     <div class="container">
-        <h1>Game Records</h1>
-        {# Add this at the top or bottom of templates/score_board/game_records.html.twig #}
+        <h1>Game Records of {{ game.name }}</h1>
+
+        <!-- Category Filter Dropdown -->
+        <div class="mb-3">
+            <select id="categoryFilter" class="form-control">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+
         <a href="{{ path('score_board_new', {'gameId': gameId}) }}" class="btn btn-primary">Create Record</a>
-        <table>
+        <div id="categoryRules"></div>
+        <div id="categoryDescription"></div>
+        <!-- Records Table -->
+        <table class="table" id="recordsTable">
             <thead>
             <tr>
                 <th>Place</th>
@@ -47,11 +61,17 @@
                             {% endif %}
                         </div>
                     </td>
-                    <td><span class="fi fi-{{ record.player.livingCountry }}"></span></td>
+                    <td><span class="fi fi-{{ record.player.livingCountry|lower }}"></span></td>
                     <td>{{ record.points }}</td>
                     <td>{{ record.category.name }}</td>
                     <td>{{ record.time ? record.time|date('H:i:s') : '' }}</td>
-                    <td>{{ record.link }}</td>
+                    <td>
+                        {% if record.link starts with 'http://' or record.link starts with 'https://' %}
+                            <a href="{{ record.link }}" target="_blank">{{ record.link }}</a>
+                        {% else %}
+                            <a href="http://{{ record.link }}" target="_blank">{{ record.link }}</a>
+                        {% endif %}
+                    </td>
                 </tr>
             {% else %}
                 <tr>
@@ -61,4 +81,36 @@
             </tbody>
         </table>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#categoryFilter').change(function() {
+                var selectedCategory = $(this).val();
+                $.ajax({
+                    url: '/scoreboard/game/' + '{{ gameId }}' + '/records/filter',
+                    type: 'GET',
+                    data: { categoryId: selectedCategory },
+                    success: function(response) {
+                        // Assuming 'response' is now a JSON object
+                        $('#recordsTable tbody').html(response.html);
+
+                        // Update rules and description
+                        if (response.rules || response.description) {
+                            $('#categoryRules').html('<h3>Rules for the Category ' + response.categoryName + '</h3>' + response.rules);
+                            $('#categoryDescription').html('<h3>Description for the Category ' + response.categoryName + '</h3>' + response.description);
+                        } else {
+                            $('#categoryRules').empty();
+                            $('#categoryDescription').empty();
+                        }
+                    }
+                });
+            });
+        });
+        document.querySelectorAll('.is-support').forEach(function(element) {
+            const username = element.getAttribute('data-username');
+            const spans = [...username].map((letter, index) => `<span class="animated-letter" style="animation-delay: ${index * 0.1}s;">${letter}</span>`).join('');
+            element.innerHTML = spans;
+        });
+    </script>
 {% endblock %}

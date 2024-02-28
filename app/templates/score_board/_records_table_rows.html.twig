@@ -1,0 +1,57 @@
+{# templates/score_board/_records_table_rows.html.twig #}
+
+{% block body %}
+{% for record in records %}
+    <tr>
+        <td>
+            {# Medal Display #}
+            {% if loop.index == 1 %}
+                <img src="/images/medal_1.png" alt="Gold Medal" class="medal">
+            {% elseif loop.index == 2 %}
+                <img src="/images/medal_2.png" alt="Silver Medal" class="medal">
+            {% elseif loop.index == 3 %}
+                <img src="/images/medal_3.png" alt="Bronze Medal" class="medal">
+            {% else %}
+                <span class="medal-placeholder"></span> {# Placeholder for alignment #}
+            {% endif %}
+        </td>
+        <td>
+            <div class="player-name">
+                {# Existing Player Display Logic #}
+                {% if record.player.isRegistered %}
+                    <div class="badge"><img src="/images/member-removebg.png" alt="badge"></div>
+                {% endif %}
+                {% if record.player.isSupport %}
+                    <div class="is-support" data-username="{{ record.player.username | e('html_attr') }}"></div>
+                {% else %}
+                    {{ record.player.username }}
+                {% endif %}
+            </div>
+        </td>
+        <td><span class="fi fi-{{ record.player.livingCountry|lower }}"></span></td>
+        <td>{{ record.points }}</td>
+        <td>{{ record.category.name }}</td>
+        <td>{{ record.time ? record.time|date('H:i:s') : '' }}</td>
+        <td>
+            {% if record.link starts with 'http://' or record.link starts with 'https://' %}
+                <a href="{{ record.link }}" target="_blank">{{ record.link }}</a>
+            {% else %}
+                <a href="http://{{ record.link }}" target="_blank">{{ record.link }}</a>
+            {% endif %}
+        </td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="7">No records found.</td>
+    </tr>
+{% endfor %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        document.querySelectorAll('.is-support').forEach(function(element) {
+            const username = element.getAttribute('data-username');
+            const spans = [...username].map((letter, index) => `<span class="animated-letter" style="animation-delay: ${index * 0.1}s;">${letter}</span>`).join('');
+            element.innerHTML = spans;
+        });
+    </script>
+{% endblock %}

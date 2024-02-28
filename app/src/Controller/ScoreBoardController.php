@@ -5,11 +5,13 @@ namespace App\Controller;
 use App\Entity\Game;
 use App\Entity\ScoreBoard;
 use App\Form\ScoreBoardType;
+use App\Repository\CategoryRepository;
 use App\Repository\GameRepository;
 use App\Repository\ScoreBoardRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -72,10 +74,17 @@ class ScoreBoardController extends AbstractController
     }
 
     #[Route('/game/{gameId}/records', name: 'game_records')]
-    public function gameRecords(ScoreBoardRepository $repository, int $gameId): Response
+    public function gameRecords(ScoreBoardRepository $repository,GameRepository $gameRepository, int $gameId): Response
     {
         // Fetch records for a specific game. This returns an empty array if no records are found.
         $records = $repository->findByGameOrdered(['game' => $gameId]);
+        $categories = [];
+        /** @var ScoreBoard $record */
+        foreach ($records as $record){
+            $category = $record->getCategory();
+            $categories[$category->getId()] = $category; // Use ID or another unique property as key
+        }
+        $game = $gameRepository->findOneBy(['id' => $gameId]);
 
         // The check below is optional since findBy should already return an empty array if no results are found.
         // However, if you want to add additional logic based on the presence of records, you can do so.
@@ -88,8 +97,36 @@ class ScoreBoardController extends AbstractController
         return $this->render('score_board/index.html.twig', [
             'records' => $records,
             'gameId' => $gameId,
+            'categories' => $categories,
+            'game' => $game
         ]);
     }
 
+    #[Route('/game/{gameId}/records/filter', name: 'game_records_ajax', methods: ['GET'])]
+    public function filterGameRecords(ScoreBoardRepository $scoreBoardRepository,CategoryRepository $categoryRepository, Request $request, int $gameId): Response
+    {
+        $categoryId = $request->query->get('categoryId');
+        $category = null;
+
+        if ($categoryId) {
+            $category = $categoryRepository->find($categoryId);
+            $records = $scoreBoardRepository->findBy(['category' => $category, 'game' => $gameId]);
+        } else {
+            $records = $scoreBoardRepository->findBy(['game' => $gameId]);
+        }
+
+        $html = $this->renderView('score_board/_records_table_rows.html.twig', [
+            'records' => $records,
+        ]);
+
+        $response = [
+            'html' => $html,
+            'rules' => $category ? $category->getRules() : '',
+            'description' => $category ? $category->getDescription() : '',
+            'categoryName' => $category ? $category->getName() : 'All Categories',
+        ];
+
+        return new JsonResponse($response);
+    }
     // Add other CRUD actions (edit, show, delete) here as needed
 }

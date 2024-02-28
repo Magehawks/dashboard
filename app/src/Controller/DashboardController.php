@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\NewsRepository;
 use App\Service\DashboardService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

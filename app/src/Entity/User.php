@@ -48,6 +48,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isSupport = false;
 
+    /**
+     * @ORM\Column(type="string", length=180, nullable=true)
+     */
+    private $resetToken;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $resetTokenExpiresAt;
+
 
     public function getId(): ?int
     {
@@ -212,6 +222,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsSupport(bool $isSupport): void
     {
         $this->isSupport = $isSupport;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResetToken()
+    {
+        return $this->resetToken;
+    }
+
+    /**
+     * @param mixed $resetToken
+     */
+    public function setResetToken($resetToken): void
+    {
+        $this->resetToken = $resetToken;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResetTokenExpiresAt()
+    {
+        return $this->resetTokenExpiresAt;
+    }
+
+    /**
+     * @param mixed $resetTokenExpiresAt
+     */
+    public function setResetTokenExpiresAt($resetTokenExpiresAt): void
+    {
+        $this->resetTokenExpiresAt = $resetTokenExpiresAt;
     }
 
     /**

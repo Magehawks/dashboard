@@ -2,28 +2,46 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container">
-    <h1>Profile</h1>
-    <div>User Info:</div>
-    <ul>
-        <li>Username: {{ user.username }}</li>
-        <li>Email: {{ user.email }}</li>
-        <!-- Display other user info as needed -->
-    </ul>
-
-    <h2>Records</h2>
-    {% for game, records in recordsByGame %}
-        <h3>{{ game }}</h3>
+    <div class="container">
+        <h1>Profile</h1>
+        <div>User Info:</div>
         <ul>
-            {% for record in records %}
-                <li> <a href="/scoreboard/game/{{ record.game.id }}/records">
-                        {% if record.player.isRegistered %}
-                            <span class="badge">Crew Member</span>
-                        {% endif %} {{ record.player.username }}{{ record.points }}{{ record.category.name }}{{ record.time ? record.time|date('H:i:s') : '' }}</a><br></li> <!-- Adjust based on your record structure -->
-            {% endfor %}
+            <li>Username: {{ user.username }}</li>
+            <li>Email: {{ user.email }}</li>
+            <!-- Display other user info as needed -->
         </ul>
-    {% else %}
-        <p>No records found.</p>
-    {% endfor %}
-</div>
+        <h2>Records</h2><!-- Records Table -->
+                <table class="table" id="recordsTable">
+                    <thead>
+                    <tr>
+                        <th>Game</th>
+                        <th>Category</th>
+                        <th>Points</th>
+                        <th>Time</th>
+                        <th>Video Link</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for record in recordsByGame %}
+                        <tr>
+                            <td>{{ record.game.name }}</td>
+                            <td>{{ record.category.name }}</td>
+                            <td>{{ record.points }}</td>
+                            <td>{{ record.time ? record.time|date('H:i:s') : '' }}</td>
+                            <td>
+                                {% if record.link starts with 'http://' or record.link starts with 'https://' %}
+                                    <a href="{{ record.link }}" target="_blank">{{ record.link }}</a>
+                                {% else %}
+                                    <a href="http://{{ record.link }}" target="_blank">{{ record.link }}</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">No records found.</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+        </div>
 {% endblock %}

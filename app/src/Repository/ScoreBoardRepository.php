@@ -62,7 +62,7 @@ class ScoreBoardRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findRecordsByUser(User $user)
+    public function findRecordsByUser(UserInterface $user)
     {
         return $this->findBy(['player' => $user]);
     }

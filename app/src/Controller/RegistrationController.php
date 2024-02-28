@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
-
     #[Route('/register', name: 'user_register')]
     public function register(Request $request,UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager,  MailerInterface $mailer): Response
     {
@@ -27,7 +26,6 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setUsername($form->get('username')->getData());
-            $user->setLivingCity($form->get('livingCity')->getData());
             $user->setLivingCountry($form->get('livingCountry')->getData());
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($passwordHasher->hashPassword(
@@ -39,11 +37,13 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $hostEmail = $this->getParameter('host_email');
+            $baseUrl = $this->getParameter('base_url');
             $email = (new Email())
-                ->from('your_email@example.com')
+                ->from($hostEmail)
                 ->to($user->getEmail())
                 ->subject('Please Verify Your Email Address')
-                ->html('<p>Please verify your email by clicking the following link: <a href="https://yourdomain.com/verify?token=' . $user->getVerificationToken() . '">Verify Email</a></p>');
+                ->html('<p>Please verify your email by clicking the following link: <a href="'.$baseUrl.'/verify?token=' . $user->getVerificationToken() . '">Verify Email</a></p>');
 
             $mailer->send($email);
 

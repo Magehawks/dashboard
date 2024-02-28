@@ -15,7 +15,7 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in Admin</h1>
+    <h1 class="h3 mb-3 font-weight-normal">sign in</h1>
     <label for="inputUsername">Username</label>
     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
     <label for="inputPassword">Password</label>
@@ -29,5 +29,10 @@
         Sign in
     </button>
 </form>
+
+    {# Add this line somewhere on the page, possibly below the login form #}
+    <div class="password-reset">
+        <a href="{{ path('app_forgot_password_request') }}">Forgot your password?</a>
+    </div>
 </div>
 {% endblock %}
