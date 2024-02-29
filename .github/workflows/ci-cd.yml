@@ -1,23 +1,49 @@
-build-job:
+image: docker:19.03.12
+
+services:
+  - docker:19.03.12-dind
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay2
+  MYSQL_ROOT_PASSWORD: secret
+  MYSQL_DATABASE: dashboard
+  MYSQL_USER: symfony
+  MYSQL_PASSWORD: symfony
+
+before_script:
+  - apk add --no-cache docker-compose
+
+build:
   stage: build
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
+    - docker-compose -f docker-compose.yml build
+  except:
+    - tags
 
-test-job1:
+test:
   stage: test
   script:
-    - echo "This job tests something"
+    - docker-compose -f docker-compose.yml up -d
+    # Replace the following line with your actual test commands
+    - echo "Running tests"
+    # Example: docker-compose exec php vendor/bin/phpunit
+    - docker-compose -f docker-compose.yml down
+  except:
+    - tags
 
-test-job2:
-  stage: test
-  script:
-    - echo "This job tests something, but takes more time than test-job1."
-    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
-    - echo "which simulates a test that runs 20 seconds longer than test-job1"
-    - sleep 20
-
-deploy-prod:
+deploy_to_production:
   stage: deploy
   script:
-    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
-  environment: production
+    - docker-compose -f docker-compose.yml up -d
+  only:
+    - master
+  environment:
+    name: production
+    url: 194.164.200.144
+  when: manual
+
