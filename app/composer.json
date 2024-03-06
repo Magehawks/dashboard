@@ -14,7 +14,6 @@
         "easycorp/easyadmin-bundle": "^4",
         "friendsofsymfony/ckeditor-bundle": "^2.5",
         "kint-php/kint": "^5.1",
-        "sensio/framework-extra-bundle": "*",
         "symfony/console": "6.0.*",
         "symfony/dotenv": "6.0.*",
         "symfony/flex": "^2",
