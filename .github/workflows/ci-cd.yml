@@ -36,7 +36,6 @@ jobs:
 
       - name: Install Composer Dependencies
         run: composer install --no-dev --no-progress --optimize-autoloader
-        working-directory: /app
 
       - name: Check Symfony Requirements
         run: symfony check:requirements
