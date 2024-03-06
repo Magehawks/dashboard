@@ -31,13 +31,18 @@ jobs:
           extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql
           coverage: none
 
-      - name: Install Composer Dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-        working-directory: /app
-
       - name: Start Docker Containers
         run: docker-compose up -d
         working-directory: /app
+
+      - name: Install Composer Dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+        env:
+          COMPOSER_PROCESS_TIMEOUT: 0
+          COMPOSER_NO_INTERACTION: 1
+          COMPOSER_NO_AUDIT: 1
+          working-directory: /app
+
 
       - name: Check Symfony Requirements
         run: symfony check:requirements
