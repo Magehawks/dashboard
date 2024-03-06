@@ -9,9 +9,11 @@
         "ext-iconv": "*",
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.11",
+        "doctrine/doctrine-fixtures-bundle": "^3.5",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^2.17",
         "easycorp/easyadmin-bundle": "^4",
+        "fakerphp/faker": "^1.23",
         "friendsofsymfony/ckeditor-bundle": "^2.5",
         "kint-php/kint": "^5.1",
         "symfony/console": "6.0.*",
@@ -26,10 +28,6 @@
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
         "vich/uploader-bundle": "*"
-    },
-    "require-dev": {
-        "fakerphp/faker": "^1.23",
-        "symfony/maker-bundle": "^1.50"
     },
     "config": {
         "allow-plugins": {
@@ -82,5 +80,8 @@
             "allow-contrib": false,
             "require": "6.0.*"
         }
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.50"
     }
 }
