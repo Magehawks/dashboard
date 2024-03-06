@@ -37,12 +37,6 @@ jobs:
 
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
-        env:
-          COMPOSER_PROCESS_TIMEOUT: 0
-          COMPOSER_NO_INTERACTION: 1
-          COMPOSER_NO_AUDIT: 1
-          working-directory: /app
-
 
       - name: Check Symfony Requirements
         run: symfony check:requirements
