@@ -39,7 +39,7 @@ jobs:
 
       - name: Install Composer Dependencies
         run: composer install --no-dev --no-progress --optimize-autoloader
-         env:
+        env:
           COMPOSER_PROCESS_TIMEOUT: 0
           COMPOSER_NO_INTERACTION: 1
           COMPOSER_NO_AUDIT: 1
