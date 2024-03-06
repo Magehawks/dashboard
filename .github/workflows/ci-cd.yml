@@ -35,7 +35,7 @@ jobs:
         run: docker-compose up -d
 
       - name: Install Composer Dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --no-dev --no-progress --optimize-autoloader
 
       - name: Check Symfony Requirements
         run: symfony check:requirements
