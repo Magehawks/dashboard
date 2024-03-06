@@ -33,7 +33,6 @@ jobs:
 
       - name: Start Docker Containers
         run: docker-compose up -d
-        working-directory: /app
 
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
