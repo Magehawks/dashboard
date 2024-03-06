@@ -33,6 +33,9 @@ jobs:
 
       - name: Start Docker Containers
         run: docker-compose up -d
+      
+      - name: List directories
+        run: ls -al
 
       - name: Install Composer Dependencies
         run: composer install --no-dev --no-progress --optimize-autoloader
