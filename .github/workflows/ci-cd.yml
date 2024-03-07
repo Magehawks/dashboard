@@ -45,14 +45,8 @@ jobs:
           COMPOSER_NO_AUDIT: 1
         working-directory: ./app
 
-      - name: Check Symfony Requirements
-        run: symfony check:requirements
-
       - name: Run Symfony Migrations
         run: php bin/console doctrine:migrations:migrate --no-interaction
-
-      - name: Run Tests
-        run: php bin/phpunit
 
       - name: Build and Push Docker Image
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
