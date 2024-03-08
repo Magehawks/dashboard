@@ -35,6 +35,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install Composer dependencies
         run: composer install
+        working-directory: ./app
       # Prepare .env file for production
       - name: Make production envfile
         uses: SpicyPizza/create-envfile@v1
