@@ -47,6 +47,7 @@ jobs:
 
       - name: Run Symfony Migrations
         run: php bin/console doctrine:migrations:migrate --no-interaction
+        working-directory: ./app
 
       - name: Build and Push Docker Image
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
