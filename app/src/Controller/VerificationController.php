@@ -34,6 +34,8 @@ class VerificationController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
 
+        $this->addFlash('info','You are now full verified, please login!');
+
         // Handle successful verification
         // For example, log the user in and redirect to the dashboard
         return $this->redirectToRoute('startpage');

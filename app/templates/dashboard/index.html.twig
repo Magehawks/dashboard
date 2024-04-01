@@ -3,6 +3,11 @@
 
 {% block body %}
     <div class="container">
+        {% for message in app.flashes('info') %}
+            <div class="flash-notice">
+                {{ message }}
+            </div>
+        {% endfor %}
         <div class="grid">
             <section>
                 <hgroup>

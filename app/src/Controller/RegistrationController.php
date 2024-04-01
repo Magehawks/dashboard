@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,12 +40,16 @@ class RegistrationController extends AbstractController
 
             $hostEmail = $this->getParameter('host_email');
             $baseUrl = $this->getParameter('base_url');
-            $email = (new Email())
+            $veriUrl = $baseUrl.'/verify?token='.$user->getVerificationToken();
+            $email = (new TemplatedEmail())
                 ->from($hostEmail)
                 ->to($user->getEmail())
-                ->subject('Please Verify Your Email Address')
-                ->html('<p>Please verify your email by clicking the following link: <a href="'.$baseUrl.'/verify?token=' . $user->getVerificationToken() . '">Verify Email</a></p>');
-
+                ->subject('Verification by Couch Run Gaming')
+                ->htmlTemplate('email/register.html.twig')
+                ->context([
+                    'user' => $user,
+                    'veriUrl' => $veriUrl,
+                ]);
             $mailer->send($email);
 
             // redirect to some route
